@@ -1,0 +1,9 @@
+.centered{
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
+    width:1000px;
+}
+
+.menuul { text-align: center; }
+.menuli { display: inline-block; } /* Don't float them */
