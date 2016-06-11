@@ -13,7 +13,7 @@
 
 Route::get('/', function () {
     return view('home');
-});
+})->name('home');
 
 Route::get('/greet/{name?}', function ($name = null) {
     return view('actions.greet',['name' => $name ] );
@@ -26,3 +26,13 @@ Route::get('/hug', function () {
 Route::get('/kiss', function () {
     return view('actions.kiss');
 })->name('kiss');
+
+Route::post('/benice',function(Illuminate\Http\Request $request){
+    if(isset($request['action']) && $request['name']){
+       if(strlen($request['name']) > 0 ){
+           return view('actions.nice',['action' => $request['action'], 'name' => $request['name']]);
+       } 
+       return redirect()->back();
+    }
+    return redirect()->back();
+})->name('benice');
