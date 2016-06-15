@@ -12,10 +12,6 @@
 */
 
 
-
-    
-    
-    
     Route::get('/', [
         
             'uses' => 'NiceActionController@getHome',
@@ -34,8 +30,8 @@
         
         Route::post('/',[
            
-           'uses' => 'NiceActionController@postNiceAction',
-           'as' => 'benice'
+           'uses' => 'NiceActionController@postInsertNiceAction',
+           'as' => 'add_action'
             
         ]);
         
