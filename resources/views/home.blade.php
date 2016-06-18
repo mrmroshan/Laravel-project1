@@ -28,5 +28,11 @@
             <button type="submit">Do a nice action!</button>
             <input type="hidden" name="_token" value="{{ Session::token() }}"/>
         </form>
+        <br><br><br>
+        <ul>
+            @foreach ($logged_actions as $logged_action)
+                <li>{{ $logged_action->nice_action->name }}</li>
+            @endforeach
+        </ul>
     </div>
 @endsection
