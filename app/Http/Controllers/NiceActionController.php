@@ -19,17 +19,40 @@ class NiceActionController extends Controller
        
        $logged_actions = NiceActionLog::all();
        
+       $query = "";
+       
        /* //filtering results
        //nice_action here is not table name but the method specified in NiceActionCtrl.
        $logged_actions = NiceActionLog::whereHas('nice_action',function($query){
            $query->where('name','=','kiss');
        })->get();
        */
+       /*
        $query = DB::table('nice_action_logs')
                     ->join('nice_actions','nice_action_logs.nice_action_id', '=', 'nice_actions.id')
                     ->where('nice_actions.name','=','kiss')
                     ->get();
-       
+        */
+        
+        //
+        //$query = DB::table('nice_action_logs')
+        //        ->insertGetId([
+        //            'nice_action_id' => DB::table('nice_actions')->select('id')->where('name','=', 'Hug' )->first()->id 
+        //            ]);
+                    
+        //update example
+        $hug = NiceAction::where('name', '=', 'Hug')->first();
+        if($hug){
+            $hug->name = 'Smail and Hug';
+            $hug->update();
+        }
+        
+        //delete example
+        $wave = NiceAction::where('name','=', 'Greet')->first();
+        if($wave){
+            $wave->delete();
+        }
+        
        return view('home',['actions' => $actions,'logged_actions' => $logged_actions,'db'=> $query]);
    }
    
