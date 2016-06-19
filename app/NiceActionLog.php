@@ -10,4 +10,6 @@ class NiceActionLog extends Model
     {
         return $this->belongsTo('App\NiceAction');
     }
+    
+   
 }

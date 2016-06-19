@@ -10,4 +10,10 @@ class NiceAction extends Model
     {
         return $this->hasMany('App\NiceActionLog');
     }
+    
+    public function categories()
+    {
+        return $this->belongsToMany('App\Category','categories_nice_action');
+    }
+    
 }
