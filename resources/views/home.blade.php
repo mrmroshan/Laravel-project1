@@ -43,5 +43,7 @@
                     </li>
             @endforeach
         </ul>
+        <br>
+        {{ dd($db) }}
     </div>
 @endsection

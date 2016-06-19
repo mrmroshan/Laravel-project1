@@ -8,15 +8,29 @@ use App\NiceAction;
 
 use App\NiceActionLog;
 
+use DB;
+
 class NiceActionController extends Controller
 {
    
    public function getHome()
    {
-       $actions = NiceAction::all();
+       $actions = NiceAction::orderBy('niceness' , 'desc')->get();
+       
        $logged_actions = NiceActionLog::all();
        
-       return view('home',['actions' => $actions,'logged_actions' => $logged_actions]);
+       /* //filtering results
+       //nice_action here is not table name but the method specified in NiceActionCtrl.
+       $logged_actions = NiceActionLog::whereHas('nice_action',function($query){
+           $query->where('name','=','kiss');
+       })->get();
+       */
+       $query = DB::table('nice_action_logs')
+                    ->join('nice_actions','nice_action_logs.nice_action_id', '=', 'nice_actions.id')
+                    ->where('nice_actions.name','=','kiss')
+                    ->get();
+       
+       return view('home',['actions' => $actions,'logged_actions' => $logged_actions,'db'=> $query]);
    }
    
     public function getNiceAction($action,$name = null)
