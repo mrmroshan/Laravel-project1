@@ -1,5 +1,7 @@
 @extends('layout.master')
 
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+
 @section('content')
     <div class='centered'>
         
@@ -25,7 +27,7 @@
             <input type="text" id="name" name="name"/>
             <label for="niceness">Niceness</label>
             <input type="text" name="niceness" id="niceness"/>
-            <button type="submit">Do a nice action!</button>
+            <button type="submit" onclick="send(event)">Do a nice action!</button>
             <input type="hidden" name="_token" value="{{ Session::token() }}"/>
         </form>
         <br><br><br>
@@ -52,6 +54,24 @@
             @endfor
         
         @endif
+        
+        <script type="text/javascript" >
+        
+            function send(event){
+                
+                event.preventDefault();
+                
+                $.ajax({
+                    
+                    type:"POST",
+                    url: "https://laravel-project1-mohamedroshan.c9users.io/do",//"{{ route('add_action') }}" ,
+                    data: { 
+                            name: $('#name').val() , 
+                            niceness:$('#niceness').val(), 
+                            _token: "{{ Session::token() }}" }
+                });
+            }
+        </script>
         
     </div>
 @endsection

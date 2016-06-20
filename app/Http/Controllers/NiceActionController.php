@@ -19,6 +19,8 @@ class NiceActionController extends Controller
        return view('home',['actions' => $actions,'logged_actions' => $logged_actions]);
    }
    
+   
+   
     public function getNiceAction($action,$name = null)
     {
         if($name === null){
@@ -30,6 +32,8 @@ class NiceActionController extends Controller
          
         return view('actions.nice' , ['action'=> $action,'name' => $name]);
     }
+   
+   
     
     public function postInsertNiceAction(Request $request)
     {
@@ -44,8 +48,16 @@ class NiceActionController extends Controller
             
             $actions = NiceAction::all();
             
+            if($request->ajax()){
+                return responce()->json();
+            }
+            
         return redirect()->route('home',['actions' => $actions]);
     }
+   
+   
+   
+   
     
     private function transformName($name)
     {
